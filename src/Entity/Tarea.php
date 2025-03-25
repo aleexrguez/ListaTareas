@@ -37,15 +37,14 @@ class Tarea
         return $this;
     }
 
-    public function getLista(): ?string
-    {
-        return $this->lista;
-    }
+    public function getLista(): ?Lista 
+{
+    return $this->lista;
+}
 
-    public function setLista(string $lista): static
-    {
-        $this->lista = $lista;
-
-        return $this;
-    }
+public function setLista(?Lista $lista): static 
+{
+    $this->lista = $lista;
+    return $this;
+}
 }

@@ -1,0 +1,11 @@
+<form method="POST" action="{{ accion }}">
+  <div class="form-group">
+    <label for="descripcion">Descripcion</label>
+    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="{{ tarea.descripcion }}">
+    {% if lista is defined %}
+        <input type="hidden" name="lista_id" value="{{ lista.id }}">
+    {% endif %}
+    <small id="descripcionAyuda" class="form-text text-muted">Descripcion</small>
+  </div>
+  <button type="submit" class="btn btn-primary">{{ etiqueta_btn_enviar|default('Guardar')  }}</button>
+</form>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tareas de {{ lista.titulo }}{% endblock %}
+{% block nav %}
+    {% include 'comunes/_menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <h1>Tareas de la lista: {{ lista.titulo }}</h1>
+    {% include 'comunes/_mensajes.html.twig' %}
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scoope="col">#</th>
+            <th scoope="col">Descripcion</th>
+            <th scoope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for index, tarea in tareas %}
+            <tr>
+               <th scoope="row">{{ index +1 }}</th>
+               <td>{{ tarea.Descripcion }}</td>
+               <td>
+                    <a href="{{ path('app_editar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}">Editar</a>
+                    <a href="{{ path('app_eliminar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}">Eliminar</a>
+               </td> 
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">No hay tareas en esta lista.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
+

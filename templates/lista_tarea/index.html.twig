@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Listas de Tareas{% endblock %}
+{% block nav %}
+    {% include 'comunes_lista/_menu.html.twig' %}
+{% endblock %}
 
 {% block body %}
     <h1>Listas de Tareas</h1>
@@ -19,7 +22,7 @@
                <th scoope="row">{{ index +1 }}</th>
                <td>{{ lista_tarea.titulo }}</td>
                <td>
-                    {#<a href="{{ path('app_ver_lista',{'id': lista_tarea.id})}}">Ver Lista</a>#}
+                    <a href="{{ path('app_ver', {'id': lista_tarea.id}) }}">Ver</a>
                     <a href="{{ path('app_editar_con_params_convert',{'id': lista_tarea.id})}}">Editar</a>
                     <a href="{{ path('app_eliminar', {'id': lista_tarea.id})}}">Eliminar</a>
                </td> 

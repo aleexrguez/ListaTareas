@@ -22,6 +22,16 @@ final class ListaTareaController extends AbstractController
         ]);
     }
 
+    #[Route('/lista/tarea/{id}', name: 'app_ver' , requirements: ['id' => '\d+'])]
+    public function ver(Lista $lista): Response
+    {
+        
+        return $this->render('tarea/lista_tareas.html.twig', [
+            'lista' => $lista,
+            'tareas' => $lista->getTareas(),
+        ]);
+    }
+
     #[Route('/lista/crear', name: 'app_crear')]
     public function crear(Request $request, EntityManagerInterface $em): Response
     {
