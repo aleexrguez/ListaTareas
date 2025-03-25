@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Lista!{% endblock %}
+
+{% block body %}
+    <h1>Editar lista!</h1>
+    {% include 'comunes_lista/_mensajes.html.twig' %}
+    {% include 'lista_tarea/_formulario.html.twig' with {'accion' : path('app_editar_con_params_convert', {'id': lista.id}), 'etiqueta_btn_enviar':'Editar'} %}
+{% endblock %}

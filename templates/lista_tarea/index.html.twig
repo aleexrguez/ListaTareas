@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listas de Tareas{% endblock %}
+
+{% block body %}
+    <h1>Listas de Tareas</h1>
+    {% include 'comunes_lista/_mensajes.html.twig' %}
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scoope="col">#</th>
+            <th scoope="col">Nombre</th>
+            <th scoope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for index, lista_tarea in listas %}
+            <tr>
+               <th scoope="row">{{ index +1 }}</th>
+               <td>{{ lista_tarea.titulo }}</td>
+               <td>
+                    {#<a href="{{ path('app_ver_lista',{'id': lista_tarea.id})}}">Ver Lista</a>#}
+                    <a href="{{ path('app_editar_con_params_convert',{'id': lista_tarea.id})}}">Editar</a>
+                    <a href="{{ path('app_eliminar', {'id': lista_tarea.id})}}">Eliminar</a>
+               </td> 
+            </tr>
+        {% else %}
+        {% endfor %}
+    </tbody>
+    </table>
+    
+{% endblock %}

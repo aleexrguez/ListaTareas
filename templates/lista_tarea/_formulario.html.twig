@@ -1,0 +1,8 @@
+<form method="POST" action="{{ accion }}">
+  <div class="form-group">
+    <label for="titulo">Título</label>
+    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la lista" value="{{ lista.titulo }}">
+    <small id="tituloAyuda" class="form-text text-muted">Ingrese el título de la lista de tareas</small>
+  </div>
+  <button type="submit" class="btn btn-primary">{{ etiqueta_btn_enviar|default('Guardar') }}</button>
+</form>
