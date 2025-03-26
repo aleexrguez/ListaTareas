@@ -23,7 +23,7 @@
                <td>{{ lista_tarea.titulo }}</td>
                <td>
                     <a href="{{ path('app_ver', {'id': lista_tarea.id}) }}">Ver</a>
-                    <a href="{{ path('app_editar_con_params_convert',{'id': lista_tarea.id})}}">Editar</a>
+                    <a href="{{ path('app_editar',{'id': lista_tarea.id})}}">Editar</a>
                     <a href="{{ path('app_eliminar', {'id': lista_tarea.id})}}">Eliminar</a>
                </td> 
             </tr>
