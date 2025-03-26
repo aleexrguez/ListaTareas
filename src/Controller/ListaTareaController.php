@@ -85,18 +85,9 @@ final class ListaTareaController extends AbstractController
     #[Route('/lista/eliminar/{id}', name: 'app_eliminar' , requirements: ['id' => '\d+'])]
     public function eliminar(Lista $lista, ListaManager $listaManager): Response
     {
-        $errores = $listaManager->validar($lista);
-        if (empty($errores)){
-            $listaManager->eliminar($lista);
-            $this->addFlash('success', 'Lista eliminada correctamente');
-            return $this-> redirectToRoute('app_lista');
-        }else{
-            foreach($errores as $error){
-                $this->addFlash(
-                    'warning',
-                    $error
-                );
-            }
-        }
+        $listaManager->eliminar($lista);
+        $this->addFlash('success', 'Lista eliminada correctamente');
+        return $this-> redirectToRoute('app_lista');    
+        
     }
 }

@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Service;
 
 use App\Entity\Tarea;
 use App\Repository\TareaRepository;
-use App\Controller\TareaController;
 use Doctrine\ORM\EntityManagerInterface;
 
 class TareaManager
 {
     private $em;
     private $tareaRepository;
-    private $validator;
 
     public function __construct(TareaRepository $tareaRepository,EntityManagerInterface $em){
         $this->em =$em;
@@ -23,7 +21,7 @@ class TareaManager
         $this->em->flush();
     }
 
-    public function editar(Tarea $tarea){
+    public function editar(Tarea $tarea): void{
         $this->em->flush();
     }
 

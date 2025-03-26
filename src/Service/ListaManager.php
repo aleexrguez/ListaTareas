@@ -4,14 +4,12 @@ namespace App\Service;
 
 Use App\Entity\Lista;
 use App\Repository\ListaRepository;
-use App\Controller\ListaTareaController;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ListaManager
 {
     private $em;
     private $listaRepository;
-    private $validator;
 
     public function __construct(ListaRepository $listaRepository,EntityManagerInterface $em){
         $this->em =$em;
