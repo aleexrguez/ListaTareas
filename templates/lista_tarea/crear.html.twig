@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Crear Tarea!{% endblock %}
+{% block title %}Crear Lista!{% endblock %}
 
 {% block body %}
-<h1>Crear tarea</h1>
+<h1>Crear Lista</h1>
 {% include 'comunes_lista/_mensajes.html.twig' %}
 {% include 'lista_tarea/_formulario.html.twig' with {'accion' : path('app_crear')} %}
 {% endblock %}

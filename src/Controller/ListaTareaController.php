@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lista;
+use App\Service\ListaManager;
 use App\Repository\ListaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,21 +34,27 @@ final class ListaTareaController extends AbstractController
     }
 
     #[Route('/lista/crear', name: 'app_crear')]
-    public function crear(Request $request, EntityManagerInterface $em): Response
+    public function crear(ListaManager $listaManager, Request $request, EntityManagerInterface $em): Response
     {
         $lista = new Lista();
         $titulo = $request->request->get('titulo', null);
 
-        if (null !== $titulo && !empty($titulo)) {
+        if(null !== $titulo){
             $lista->setTitulo($titulo);
-            $em->persist($lista);
-            $em->flush();
-            $this->addFlash('success', 'Lista de tareas creada correctamente');
-            return $this->redirectToRoute('app_lista'); 
-        } else {
-            $this->addFlash('warning', 'El campo título es obligatorio');
+            $errores = $listaManager->validar($lista);
+            if (empty($errores)){
+                $listaManager->crear($lista);
+                $this->addFlash('success', 'Lista de tareas creada correctamente');
+                return $this->redirectToRoute('app_lista'); 
+            }else{
+                foreach($errores as $error){
+                    $this->addFlash(
+                        'warning',
+                        $error
+                    );
+                }
+            }
         }
-
         return $this->render('lista_tarea/crear.html.twig', [
             'lista' => $lista,
         ]);
