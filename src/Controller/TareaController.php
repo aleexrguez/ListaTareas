@@ -7,7 +7,6 @@ use App\Entity\Lista;
 use App\Service\TareaManager;
 use App\Repository\TareaRepository;
 use App\Repository\ListaRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,9 +42,11 @@ final class TareaController extends AbstractController
 
         $tarea = new Tarea();
         $descripcion = $request->request->get('descripcion', null);
+        $finalizada = $request->request->get('finalizada', false);
 
         if (null !==$descripcion) {
             $tarea->setDescripcion($descripcion);
+            $tarea->setFinalizada($finalizada ? true : false); 
             $tarea->setLista($lista); 
             $errores = $tareaManager->validar($tarea);
             if (empty($errores)){
@@ -79,8 +80,10 @@ final class TareaController extends AbstractController
             throw $this->createNotFoundException('La tarea no existe.');
         }
         $descripcion = $request->request->get('descripcion', null);
+        $finalizada = $request->request->get('finalizada', false);
         if (!empty($descripcion)) {
             $tarea->setDescripcion($descripcion);
+            $tarea->setFinalizada($finalizada ? true : false);
             $errores = $tareaManager->validar($tarea);
             if (empty($errores)){
                 $tareaManager->editar($tarea);
@@ -118,5 +121,26 @@ final class TareaController extends AbstractController
         $this->addFlash('success', 'Tarea eliminada correctamente');
         return $this->redirectToRoute('app_tareas_lista', ['id' => $lista->getId()]);
         
+    }
+
+    #[Route('/tarea/{id}/finalizar', name: 'app_finalizar_tarea', methods: ['POST'])]
+    public function finalizarTarea(int $id, Request $request, TareaRepository $tareaRepository, TareaManager $tareaManager): Response
+    {
+        $tarea = $tareaRepository->find($id);
+
+        if (!$tarea) {
+            throw $this->createNotFoundException('La tarea no existe.');
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            $nuevaFinalizacion = !$tarea->isFinalizada();
+            $tareaManager->finalizar($tarea, $nuevaFinalizacion);
+
+            return $this->json([
+                'finalizada' => $nuevaFinalizacion
+            ]);
+        }
+
+        throw $this->createNotFoundException();
     }
 }

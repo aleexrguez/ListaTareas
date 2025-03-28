@@ -1,11 +1,17 @@
 <form method="POST" action="{{ accion }}">
   <div class="form-group">
-    <label for="descripcion">Descripcion</label>
-    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="{{ tarea.descripcion }}">
+    <label for="descripcion">Descripción</label>
+    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ tarea.descripcion }}">
     {% if lista is defined %}
         <input type="hidden" name="lista_id" value="{{ lista.id }}">
     {% endif %}
-    <small id="descripcionAyuda" class="form-text text-muted">Descripcion</small>
+    <small id="descripcionAyuda" class="form-text text-muted">Descripción</small>
   </div>
-  <button type="submit" class="btn btn-primary">{{ etiqueta_btn_enviar|default('Guardar')  }}</button>
+
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="finalizada" name="finalizada" {% if tarea.finalizada %}checked{% endif %}>
+    <label class="form-check-label" for="finalizada">Finalizada</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{ etiqueta_btn_enviar|default('Guardar') }}</button>
 </form>

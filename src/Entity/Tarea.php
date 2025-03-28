@@ -20,6 +20,9 @@ class Tarea
     #[ORM\JoinColumn(nullable: false)]
     private ?Lista $lista = null;
 
+    #[ORM\Column]
+    private ?bool $finalizada = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Tarea
 public function setLista(?Lista $lista): static 
 {
     $this->lista = $lista;
+    return $this;
+}
+
+public function isFinalizada(): ?bool
+{
+    return $this->finalizada;
+}
+
+public function setFinalizada(bool $finalizada): static
+{
+    $this->finalizada = $finalizada;
+
     return $this;
 }
 }

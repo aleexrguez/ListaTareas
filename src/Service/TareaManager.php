@@ -30,6 +30,11 @@ class TareaManager
         $this->em->flush();
     }
 
+    public function finalizar(Tarea $tarea, bool $estado): void {
+        $tarea->setFinalizada($estado);
+        $this->em->flush();
+    }
+
     public function validar(Tarea $tarea){
         $errores = [];
         if (empty($tarea->getDescripcion()))

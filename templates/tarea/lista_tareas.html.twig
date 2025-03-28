@@ -19,10 +19,22 @@
         {% for index, tarea in tareas %}
             <tr>
                <th scoope="row">{{ index +1 }}</th>
-               <td>{{ tarea.Descripcion }}</td>
+               <td class="titulo">
+                    {% if tarea.finalizada %}
+                        <s>{{ tarea.descripcion }}</s>
+                    {% else %}
+                        {{ tarea.descripcion }}
+                    {% endif %}
+                </td>
                <td>
                     <a href="{{ path('app_editar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}">Editar</a>
                     <a href="{{ path('app_eliminar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}">Eliminar</a>
+                    <a href="#"
+                           class="btn btn-link mg-3 finalizar"
+                           data-url="{{ path('app_finalizar_tarea', {'id': tarea.id}) }}"
+                           data-texto-contrario="{{ tarea.finalizada ? 'Finalizar' : 'Desfinalizar' }}">
+                            {{ tarea.finalizada ? 'Desfinalizar' : 'Finalizar' }}
+                        </a>
                </td> 
             </tr>
         {% else %}
