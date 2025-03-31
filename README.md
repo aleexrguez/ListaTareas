@@ -13,9 +13,10 @@ Asegúrate de tener instalado en el equipo:
 ## Cómo desplegar el proyecto
 
 1. **Clona el repositorio**
+```bash
 git clone https://github.com/tuusuario/nombre-repo.git
 cd nombre-repo
-
+```
 2. Instalar dependencias
 composer install
 
