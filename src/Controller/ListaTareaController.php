@@ -82,12 +82,19 @@ final class ListaTareaController extends AbstractController
         ]);
     }
 
-    #[Route('/lista/eliminar/{id}', name: 'app_eliminar' , requirements: ['id' => '\d+'])]
-    public function eliminar(Lista $lista, ListaManager $listaManager): Response
-    {
+    #[Route('/lista/{id}/eliminar', name: 'app_eliminar_lista', methods: ['GET', 'POST'])]
+    public function eliminarLista(int $id, Request $request, ListaRepository $listaRepository, ListaManager $listaManager): Response {
+        $lista = $listaRepository->find($id);
+
+    if (!$lista) {
+        return $this->json(['error' => 'Lista no encontrada'], 404);
+    }
+
+    if ($request->isXmlHttpRequest()) {
         $listaManager->eliminar($lista);
-        $this->addFlash('success', 'Lista eliminada correctamente');
-        return $this-> redirectToRoute('app_lista');    
-        
+        return $this->json(['success' => true]);
+    }
+
+    return $this->json(['error' => 'Solicitud inválida'], 400);
     }
 }

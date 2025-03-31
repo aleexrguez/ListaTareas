@@ -143,4 +143,21 @@ final class TareaController extends AbstractController
 
         throw $this->createNotFoundException();
     }
+    #[Route('/tarea/{id}/eliminar', name: 'app_eliminar_tarea_ajax', methods: ['POST'])]
+    public function eliminarTareaAjax(int $id, Request $request, TareaRepository $tareaRepository, TareaManager $tareaManager): Response
+    {
+        $tarea = $tareaRepository->find($id);
+
+        if (!$tarea) {
+            return $this->json(['error' => 'Tarea no encontrada'], 404);
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            $tareaManager->eliminar($tarea);
+            return $this->json(['success' => true]);
+        }
+
+        return $this->json(['error' => 'Solicitud inválida'], 400);
+    }
+
 }

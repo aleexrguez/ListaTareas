@@ -1,9 +1,7 @@
+{% set current_menu = 'comunes_lista/_menu.html.twig' %}
 {% extends 'base.html.twig' %}
 
 {% block title %}Listas de Tareas{% endblock %}
-{% block nav %}
-    {% include 'comunes_lista/_menu.html.twig' %}
-{% endblock %}
 
 {% block body %}
     <h1>Listas de Tareas</h1>
@@ -22,9 +20,18 @@
                <th scoope="row">{{ index +1 }}</th>
                <td>{{ lista_tarea.titulo }}</td>
                <td>
-                    <a href="{{ path('app_ver', {'id': lista_tarea.id}) }}">Ver</a>
-                    <a href="{{ path('app_editar',{'id': lista_tarea.id})}}">Editar</a>
-                    <a href="{{ path('app_eliminar', {'id': lista_tarea.id})}}">Eliminar</a>
+                    <a href="{{ path('app_ver', {'id': lista_tarea.id}) }}" class="btn btn-sm btn-info" title="Ver">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{{ path('app_editar',{'id': lista_tarea.id})}}" class="btn btn-sm btn-warning" title="Editar">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    <button
+                        class="btn btn-sm btn-danger eliminar-lista"
+                        data-id="{{ lista_tarea.id }}"
+                        data-nombre="{{ lista_tarea.titulo }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
                </td> 
             </tr>
         {% else %}

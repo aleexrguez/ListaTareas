@@ -1,9 +1,8 @@
+{% set current_menu = 'comunes/_menu.html.twig' %}
 {% extends 'base.html.twig' %}
 
 {% block title %}Tareas de {{ lista.titulo }}{% endblock %}
-{% block nav %}
-    {% include 'comunes/_menu.html.twig' %}
-{% endblock %}
+
 {% block body %}
     <h1>Tareas de la lista: {{ lista.titulo }}</h1>
     {% include 'comunes/_mensajes.html.twig' %}
@@ -27,15 +26,29 @@
                     {% endif %}
                 </td>
                <td>
-                    <a href="{{ path('app_editar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}">Editar</a>
-                    <a href="{{ path('app_eliminar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}">Eliminar</a>
-                    <a href="#"
-                           class="btn btn-link mg-3 finalizar"
-                           data-url="{{ path('app_finalizar_tarea', {'id': tarea.id}) }}"
-                           data-texto-contrario="{{ tarea.finalizada ? 'Finalizar' : 'Desfinalizar' }}">
-                            {{ tarea.finalizada ? 'Desfinalizar' : 'Finalizar' }}
-                        </a>
-               </td> 
+                <a href="{{ path('app_editar_tarea', {'listaId': lista.id, 'id': tarea.id}) }}" class="btn btn-sm btn-warning" title="Editar">
+                    <i class="fas fa-pen"></i>
+                </a>
+
+                <button
+                    class="btn btn-sm btn-danger eliminar-tarea"
+                    data-id="{{ tarea.id }}"
+                    data-nombre="{{ tarea.descripcion }}">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+                <a href="#"
+                class="btn btn-sm btn-success finalizar"
+                data-url="{{ path('app_finalizar_tarea', {'id': tarea.id}) }}"
+                data-texto-contrario="{{ tarea.finalizada ? 'Finalizar' : 'Desfinalizar' }}"
+                title="{{ tarea.finalizada ? 'Desfinalizar' : 'Finalizar' }}">
+                    {% if tarea.finalizada %}
+                        <i class="fas fa-undo"></i> 
+                    {% else %}
+                        <i class="fas fa-check"></i> 
+                    {% endif %}
+                </a>
+            </td>
             </tr>
         {% else %}
             <tr>
