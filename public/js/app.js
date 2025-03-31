@@ -62,6 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.show();
     });
 
+    $(document).on('click', '.eliminar-lista', function () {
+        idAEliminar = $(this).data('id');
+        tipoAEliminar = 'lista';
+        const nombre = $(this).data('nombre');
+    
+        $('#nombre-objeto').text(nombre);
+        $('#tipo-objeto').text('la lista');
+    
+        const modal = new bootstrap.Modal(document.getElementById('modalEliminar'));
+        modal.show();
+    });
+    
+
     $('#btn-confirmar-eliminar').on('click', function () {
         if (!idAEliminar || !tipoAEliminar) return;
 
