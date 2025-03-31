@@ -21,9 +21,12 @@ final class TareaController extends AbstractController
 
         if (!$lista) {
             throw $this->createNotFoundException('La lista no existe.');
-        }
+        } 
 
-        $tareas = $tareaRepository->findBy(['lista' => $lista]);
+        $tareas = $tareaRepository->findBy([
+            'lista' => $lista,
+            'activo' => true
+        ]);        
 
         return $this->render('tarea/lista_tareas.html.twig', [
             'tareas' => $tareas,
@@ -102,25 +105,6 @@ final class TareaController extends AbstractController
             'tarea' => $tarea,
             'lista' => $lista,
         ]);
-    }
-
-    #[Route('/lista/{listaId}/tarea/eliminar/{id}', name: 'app_eliminar_tarea', requirements: ['listaId' => '\d+', 'id' => '\d+'])]
-    public function eliminar(int $listaId, int $id, ListaRepository $listaRepository,TareaManager $tareaManager, TareaRepository $tareaRepository): Response
-    {
-        $lista = $listaRepository->find($listaId);
-        $tarea = $tareaRepository->find($id);
-
-        if (!$lista) {
-            throw $this->createNotFoundException('La lista no existe.');
-        }
-
-        if (!$tarea) {
-            throw $this->createNotFoundException('La tarea no existe.');
-        }
-        $tareaManager->eliminar($tarea);
-        $this->addFlash('success', 'Tarea eliminada correctamente');
-        return $this->redirectToRoute('app_tareas_lista', ['id' => $lista->getId()]);
-        
     }
 
     #[Route('/tarea/{id}/finalizar', name: 'app_finalizar_tarea', methods: ['POST'])]

@@ -51,6 +51,9 @@
                         {% block body %}{% endblock %}
                     </div>
                 </main>
+                <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+                    <div id="toast-container"></div>
+                </div>                
             </div>
             {% block javascripts %}
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -79,6 +82,11 @@
                 </div>
                 </div>
             </div>
+        </div>
+        <div id="flash-messages"
+            data-success="{{ app.session.flashBag.get('success')|join('|') }}"
+            data-warning="{{ app.session.flashBag.get('warning')|join('|') }}"
+            data-error="{{ app.session.flashBag.get('error')|join('|') }}">
         </div>
     </body>
 </html>

@@ -16,7 +16,7 @@ final class ListaTareaController extends AbstractController
     #[Route('/', name: 'app_lista')]
     public function index(ListaRepository $listaRepository): Response
     {
-        $listas = $listaRepository->findAll();
+        $listas = $listaRepository->findBy(['activo' => true]);
         return $this->render('lista_tarea/index.html.twig', [
             'listas' => $listas,
         ]);

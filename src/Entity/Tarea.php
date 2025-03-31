@@ -23,6 +23,9 @@ class Tarea
     #[ORM\Column]
     private ?bool $finalizada = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $activo = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -41,25 +44,35 @@ class Tarea
     }
 
     public function getLista(): ?Lista 
-{
-    return $this->lista;
-}
+    {
+        return $this->lista;
+    }
 
-public function setLista(?Lista $lista): static 
-{
-    $this->lista = $lista;
-    return $this;
-}
+    public function setLista(?Lista $lista): static 
+    {
+        $this->lista = $lista;
+        return $this;
+    }
 
-public function isFinalizada(): ?bool
-{
-    return $this->finalizada;
-}
+    public function isFinalizada(): ?bool
+    {
+        return $this->finalizada;
+    }
 
-public function setFinalizada(bool $finalizada): static
-{
-    $this->finalizada = $finalizada;
+    public function setFinalizada(bool $finalizada): static
+    {
+        $this->finalizada = $finalizada;
 
-    return $this;
-}
+        return $this;
+    }
+    public function isActivo(): bool
+    {
+        return $this->activo;
+    }
+
+    public function setActivo(bool $activo): self
+    {
+        $this->activo = $activo;
+        return $this;
+    }
 }

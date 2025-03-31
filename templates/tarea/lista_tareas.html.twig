@@ -5,7 +5,6 @@
 
 {% block body %}
     <h1>Tareas de la lista: {{ lista.titulo }}</h1>
-    {% include 'comunes/_mensajes.html.twig' %}
     <table id="datatable-listas" class="table table-striped">
     <thead>
         <tr>
@@ -50,11 +49,13 @@
                 </a>
             </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">No hay tareas en esta lista.</td>
-            </tr>
-        {% endfor %}
+            {% else %}
+                <tr>
+                    <td>No hay tareas en esta lista.</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
     </tbody>
     </table>
 {% endblock %}

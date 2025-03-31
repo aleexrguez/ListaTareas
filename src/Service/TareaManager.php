@@ -26,7 +26,7 @@ class TareaManager
     }
 
     public function eliminar(Tarea $tarea): void{
-        $this->em->remove($tarea);
+        $tarea->setActivo(false);
         $this->em->flush();
     }
 

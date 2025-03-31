@@ -26,7 +26,7 @@ class ListaManager
     }
 
     public function eliminar(Lista $lista): void{
-        $this->em->remove($lista);
+        $lista->setActivo(false);
         $this->em->flush();
     }
 

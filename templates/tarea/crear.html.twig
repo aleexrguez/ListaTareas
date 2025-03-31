@@ -4,7 +4,6 @@
 
 {% block body %}
 <h1>Crear tarea</h1>
-{% include 'comunes/_mensajes.html.twig' %}
 {% if lista is defined %}
     {% include 'tarea/_formulario.html.twig' with {'accion' : path('app_crear_tarea', {'id': lista.id})} %}
 {% else %}

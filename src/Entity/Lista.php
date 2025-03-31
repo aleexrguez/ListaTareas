@@ -21,6 +21,9 @@ class Lista
     #[ORM\OneToMany(mappedBy: "lista", targetEntity: Tarea::class, orphanRemoval: true)]
     private Collection $tareas;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $activo = true;
+
     public function __construct()
     {
         $this->tareas = new ArrayCollection();
@@ -66,6 +69,17 @@ class Lista
             }
         }
 
+        return $this;
+    }
+
+    public function isActivo(): bool
+    {
+        return $this->activo;
+    }
+
+    public function setActivo(bool $activo): self
+    {
+        $this->activo = $activo;
         return $this;
     }
 }
