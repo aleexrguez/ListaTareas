@@ -15,13 +15,15 @@ Asegúrate de tener instalado en el equipo:
 1. **Clona el repositorio**
 ```bash
 git clone https://github.com/aleexrguez/ListaTareas.git
-cd nombre-repo
+```
+```bash
+cd lista_tareas
 ```
 2. Instalar dependencias
 ```bash
 composer install
 ```
-4. Configurar la base de datos
+4. Configurar la base de datos (usar comando en powershell/terminal de visual Studio)
 ```bash
 cp .env .env.local
 ```
@@ -32,6 +34,8 @@ DATABASE_URL="mysql://usuario:contraseña@127.0.0.1:3306/nombre_bd?serverVersion
 4. Crear la base de datos y ejecutar migraciones
 ```bash
 php bin/console doctrine:database:create
+```
+```bash
 php bin/console doctrine:migrations:migrate
 ```
 5. Levantar el servidor de Symfony
