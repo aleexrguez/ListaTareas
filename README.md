@@ -14,7 +14,7 @@ Asegúrate de tener instalado en el equipo:
 
 1. **Clona el repositorio**
 ```bash
-git clone https://github.com/tuusuario/nombre-repo.git
+git clone https://github.com/aleexrguez/ListaTareas.git
 cd nombre-repo
 ```
 2. Instalar dependencias
